@@ -6,13 +6,14 @@ let computerScore = 0;
 const resultsDiv = document.getElementById("results");
 const scoreDiv = document.getElementById("score");
 const buttons = document.querySelectorAll("button");
+const ptsLeft = document.getElementById("pts-left");
 
 // ==== logic (functions) ====
 function getComputerChoice () {  
-    let rand = Math.random();
+    let r = Math.random();
 
-    if (rand < 1/3) return "rock";
-    if (rand < 2/3) return "paper";
+    if (r < 1/3) return "rock";
+    if (r < 2/3) return "paper";
     return "scissors"; 
 }
 
@@ -34,6 +35,10 @@ function disableButtons() {
     buttons.forEach(function(button) {
         button.disabled = true;
     });
+}
+
+function updatePtsLeft() {
+    ptsLeft.textContent = 5 - Math.max(humanScore, computerScore);
 }
 
 //humanChoice is passed via events on click:
@@ -61,14 +66,12 @@ function playRound (humanChoice) {
 
         updateScore();
         endGame();
+        updatePtsLeft();
     }
 
-// ==== events ==== 
+// ==== events ====
+// pass the button value on click to playRound as human's choice
+
 document.querySelectorAll("button").forEach(btn => {
     btn.addEventListener("click", () => playRound(btn.id));
-});
-
-// Instead of repeating next 3 lines, wrap in one action, using .forEach();
-// document.getElementById("rock").addEventListener("click", () => playRound("rock"));
-// document.getElementById("paper").addEventListener("click", () => playRound("paper"));
-// document.getElementById("scissors").addEventListener("click", () => playRound("scissors"));
+}); 
