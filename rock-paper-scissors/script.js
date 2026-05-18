@@ -1,63 +1,74 @@
-function getComputerChoice () {  
-    let randomNum = Math.random();
-
-    if (randomNum < 1/3) {
-        return "rock";
-    } else if (randomNum < 2/3) {
-        return "paper";
-    } else {
-        return "scissors";
-    } 
-}
-
-function getHumanChoice () {
-    return prompt("Pick rock, paper or scissors").toLowerCase();
-}
-
-function playGame() {
-//keeping score for the computer and the user:
+// ==== state ====
 let humanScore = 0;
 let computerScore = 0;
 
-    function playRound (humanChoice, computerChoice) {
+// ==== DOM ==== 
+const resultsDiv = document.getElementById("results");
+const scoreDiv = document.getElementById("score");
+const buttons = document.querySelectorAll("button");
+
+// ==== logic (functions) ====
+function getComputerChoice () {  
+    let rand = Math.random();
+
+    if (rand < 1/3) return "rock";
+    if (rand < 2/3) return "paper";
+    return "scissors"; 
+}
+
+function updateScore() {
+    scoreDiv.textContent = `Human: ${humanScore} | Computer: ${computerScore}`;
+}
+
+function endGame() {
+    if (humanScore === 5) {
+        resultsDiv.textContent = "Congratulations. You won the game!";
+        disableButtons();
+    } else if (computerScore === 5) {
+        resultsDiv.textContent = "Game over. Computer won the game!";
+        disableButtons();
+    }
+}
+
+function disableButtons() {
+    buttons.forEach(function(button) {
+        button.disabled = true;
+    });
+}
+
+//humanChoice is passed via events on click:
+function playRound (humanChoice) {
+        const computerChoice = getComputerChoice();
+
         //in case of a tie:
         if (humanChoice === computerChoice) {
-            console.log(`It's a tie! Both chose ${humanChoice}`);
+            resultsDiv.textContent = `It's a tie! Both chose ${humanChoice}`;
             return;
         }
-        //in case of human winning:
+
         if (humanChoice === "rock" && computerChoice === "scissors" ||
             humanChoice === "paper" && computerChoice === "rock" ||
             humanChoice === "scissors" && computerChoice === "paper"
         ) {
             humanScore ++;
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`); 
+            resultsDiv.textContent = `You win! ${humanChoice} beats ${computerChoice}`; 
         }
-        //in case of computer winning, so, not a tie, not user's win:
+
         else {
             computerScore++;
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+            resultsDiv.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
         }
+
+        updateScore();
+        endGame();
     }
 
-// Playing 5 rounds "manually", before the loops in-depth knowledge:
-playRound(getHumanChoice(), getComputerChoice());
-playRound(getHumanChoice(), getComputerChoice());
-playRound(getHumanChoice(), getComputerChoice());
-playRound(getHumanChoice(), getComputerChoice());
-playRound(getHumanChoice(), getComputerChoice()); 
+// ==== events ==== 
+document.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => playRound(btn.id));
+});
 
-console.log("--- FINAL SCORE ---");
-console.log(`Human: ${humanScore} | Computer: ${computerScore}`);
-
-if (humanScore > computerScore) {
-        console.log("Congrats! You are the overall winner!");
-    } else if (humanScore < computerScore) {
-        console.log("Game over! Computer wins the match.");
-    } else {
-        console.log("Overall result: It's a draw!");
-    }
-
-}
-
-playGame();
+// Instead of repeating next 3 lines, wrap in one action, using .forEach();
+// document.getElementById("rock").addEventListener("click", () => playRound("rock"));
+// document.getElementById("paper").addEventListener("click", () => playRound("paper"));
+// document.getElementById("scissors").addEventListener("click", () => playRound("scissors"));
