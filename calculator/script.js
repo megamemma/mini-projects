@@ -28,3 +28,50 @@ function operate(oper, num1, num2) {
 
 const display = document.querySelector(".display");
 const digitButtons = document.querySelectorAll(".digit");
+
+//Do we have the number before math sign, or after math sign?:
+digitButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const clickedNum = button.textContent;
+        if (oper === "") {
+            num1 += clickedNum;
+            display.textContent = num1;
+        } else {
+            num2 += clickedNum;
+            display.textContent = num2;
+        }
+    });
+});
+
+const operButtons = document.querySelectorAll(".operator");
+operButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        //Only allow picking an oper-r if user has typed num1 first
+        if (num1 !== "") {
+            oper = button.textContent; // Stores +, -, * or /
+        }
+    })
+});
+
+// The result, =
+const equalsButton = document.querySelector(".equals");
+equalsButton.addEventListener("click", () => {
+    //Make sure we have all 3 pcs before calc-ng:
+    if (num1 !== "" && oper !== "" && num2 !== "") {
+        const result = operate(oper, num1, num2);
+        display.textContent = result; 
+        //2. Update memory so user can chain next calc-s:
+        num1 = result.toString();
+        oper = "";
+        num2 = "";
+    }
+})
+
+// The clear, C
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", () => {
+    num1 = "";
+    oper = "";
+    num2 = "";
+    display.textContent = "0";
+});
