@@ -25,3 +25,6 @@ function operate(oper, num1, num2) {
 
     return "Unknown operator.";
 }
+
+const display = document.querySelector(".display");
+const digitButtons = document.querySelectorAll(".digit");

@@ -1,6 +1,6 @@
 .calculator {
     width: 50%;
-    background: lavender;
+    background: rgb(160, 214, 165);
     padding: 20px;
     border-radius: 16px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
@@ -28,6 +28,6 @@
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    background: #d0ace6;
+    background: #78a29a;
     color: white;
 }
