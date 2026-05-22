@@ -43,14 +43,24 @@ digitButtons.forEach(button => {
     });
 });
 
+// Operators and chaining evaluations
 const operButtons = document.querySelectorAll(".operator");
 operButtons.forEach(button => {
     button.addEventListener("click", () => {
-        //Only allow picking an oper-r if user has typed num1 first
-        if (num1 !== "") {
-            oper = button.textContent; // Stores +, -, * or /
+            // If we've a full equation waiting, calc it rn
+            if (num1 !== "" && num2 !== "") {
+                const result = operate(oper, num1, num2);
+                display.textContent = result;
+                num1 = result.toString();
+                num2 = "";
+            }
+
+            // Save the +, -, *, / user just clicked.
+            if (num1 !== "") {
+            oper = button.textContent;
+            }
         }
-    })
+    });
 });
 
 // The result, =
