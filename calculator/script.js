@@ -20,10 +20,10 @@ function operate(oper, num1, num2) {
     num2 = Number(num2);
     let result;
 
-    if (oper === "+") return add(num1, num2);
-    else if (oper === "-") return subtract(num1, num2);
-    else if (oper === "*") return multiply(num1, num2);
-    else if (oper === "/") return divide(num1, num2);
+    if (oper === "+") result = add(num1, num2);
+    else if (oper === "-") result = subtract(num1, num2);
+    else if (oper === "*") result = multiply(num1, num2);
+    else if (oper === "/") result = divide(num1, num2);
     else return "Unknown operator.";
 
     //If the result has decimals, round to 4 dec.
@@ -81,7 +81,7 @@ operButtons.forEach(button => {
 // The result, =
 const equalsButton = document.querySelector(".equals");
 equalsButton.addEventListener("click", () => {
-    //Make sure we have all 3 pcs before calc-ng:
+    //See if we've all 3 pcs before calc-ng:
     if (num1 !== "" && oper !== "" && num2 !== "") {
         const result = operate(oper, num1, num2);
         display.textContent = result; 
@@ -89,8 +89,9 @@ equalsButton.addEventListener("click", () => {
         num1 = result.toString();
         oper = "";
         num2 = "";
+        isFinished = true; // Tell calc problem's solved.
     }
-})
+});
 
 // The clear, C
 const clearButton = document.querySelector(".clear");
