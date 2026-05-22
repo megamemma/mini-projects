@@ -9,6 +9,7 @@ function divide(a, b) {
 let num1 = "";
 let oper = "";
 let num2 = "";
+let isFinished = false; // Tracks if just solved an equation
 
 function operate(oper, num1, num2) {
     if (oper === "" || num1 === "" || num2 === "") {
@@ -17,13 +18,20 @@ function operate(oper, num1, num2) {
     
     num1 = Number(num1);
     num2 = Number(num2);
+    let result;
 
     if (oper === "+") return add(num1, num2);
-    if (oper === "-") return subtract(num1, num2);
-    if (oper === "*") return multiply(num1, num2);
-    if (oper === "/") return divide(num1, num2);
+    else if (oper === "-") return subtract(num1, num2);
+    else if (oper === "*") return multiply(num1, num2);
+    else if (oper === "/") return divide(num1, num2);
+    else return "Unknown operator.";
 
-    return "Unknown operator.";
+    //If the result has decimals, round to 4 dec.
+    if (typeof result === "number" && !Number.isInteger(result)) {
+        return Math.round(result * 10000) / 10000;
+    }
+
+    return result;
 }
 
 const display = document.querySelector(".display");
@@ -33,6 +41,13 @@ const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach(button => {
     button.addEventListener("click", () => {
         const clickedNum = button.textContent;
+        
+        //If a prev calc-n just ended, reset all for a new one
+        if (isFinished) {
+            num1 = "";
+            isFinished = false;
+        }
+
         if (oper === "") {
             num1 += clickedNum;
             display.textContent = num1;
