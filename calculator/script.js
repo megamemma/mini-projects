@@ -73,9 +73,9 @@ operButtons.forEach(button => {
             // Save the +, -, *, / user just clicked.
             if (num1 !== "") {
             oper = button.textContent;
+            isFinished = false; 
             }
-        }
-    });
+        });
 });
 
 // The result, =
@@ -101,3 +101,47 @@ clearButton.addEventListener("click", () => {
     num2 = "";
     display.textContent = "0";
 });
+
+const decimalButton = document.querySelector(".decimal");
+decimalButton.addEventListener("click", () => {
+    //If user clicks "." right after "=", start a fresh num "0."
+
+    if (isFinished) {
+        num1 = "0.";
+        display.textContent = num1;
+        isFinished = false;
+        return;
+    }
+
+    if (oper === "") {
+        // Only add "." if num1 doesn't alr have one.
+        if (!num1.includes(".")) {
+            if (num1 === "") num1 = "0"; //If empty, make it "0."
+            num1 += ".";
+            display.textContent = num1;
+        }
+    } else {
+        if (!num2.includes(".")) {
+            if (num2 === "") num2 = "0";
+            num2 += ".";
+            display.textContent = num2;
+        }
+    }
+});
+
+const backspaceButton = document.querySelector(".backspace");
+
+backspaceButton.addEventListener("click", () => {
+    //If they click bckspc after an equation done, just stop:
+    if (isFinished) return;
+
+    if (oper === "") {
+        //Modify num1
+        num1 = num1.slice(0, -1);
+        display.textContent = num1 === "" ? "0" : num1; // If empty, show 0
+    } else {
+        //Modify num2
+        num2 = num2.slice(0, -1);
+        display.textContent = num2 === "" ? "0" : num2; 
+    }
+})
