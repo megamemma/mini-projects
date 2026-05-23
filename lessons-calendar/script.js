@@ -1,21 +1,21 @@
 const grid = document.getElementById("calendar-grid");
 const totalDays = 31;
 const startOffset = 4; //May 1 2026 started on Friday
-const today = 18; 
+const today = 24; 
 
 let dragged = null;
 
 // DATA
 const events = [
-    {id: 1, name: "Max", days: [1, 8, 15, 26] },
-    {id: 2, name: "Vova", days: [5, 12, 19, 26] },
-    {id: 3, name: "Asya", days: [5, 10, 11, 20, 25] },
-    {id: 4, name: "Maya", days: [14, 20, 27] },
-    {id: 5, name: "Vika", days: [15, 20, 24, 28, 31] },
-    {id: 6, name: "Sasha", days: [6, 13, 20, 27] },
-    {id: 7, name: "Delya", days: [2, 15, 22, 29] },
-    {id: 8, name: "Igor", days: [24, 31] },
-    {id: 9, name: "Alexandra", days: [3, 10, 24] },
+    {id: 1, name: "Max", days: [1, 8, 15, 26], length: 60 },
+    {id: 2, name: "Vova", days: [5, 12, 19, 26], length: 40 },
+    {id: 3, name: "Asya", days: [5, 10, 11, 20, 25], length: 40 },
+    {id: 4, name: "Maya", days: [14, 20, 27], length: 60 },
+    {id: 5, name: "Vika", days: [15, 20, 24, 28, 31], length: 60 },
+    {id: 6, name: "Sasha", days: [6, 13, 20, 27], length: 60 },
+    {id: 7, name: "Delya", days: [2, 15, 22, 29], length: 40},
+    {id: 8, name: "Igor", days: [24, 31], length: 60},
+    {id: 9, name: "Alexandra", days: [3, 10, 24], length: 60},
 ];
 
 // RENDER EVENTS FOR ONE DAY:
