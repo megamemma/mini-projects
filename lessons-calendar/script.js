@@ -1,7 +1,7 @@
 const grid = document.getElementById("calendar-grid");
 const totalDays = 31;
 const startOffset = 4; //May 1 2026 started on Friday
-const today = 18; 
+const today = 24; 
 
 let dragged = null;
 
