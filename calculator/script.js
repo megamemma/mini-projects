@@ -11,6 +11,14 @@ let oper = "";
 let num2 = "";
 let isFinished = false; // Tracks if just solved an equation
 
+function updateDisplay() {
+    if (oper === "") {
+        display.textContent = num1 === "" ? "0" : num1;
+    } else {
+        display.textContent = num2 === "" ? "0" : num2;
+    }
+}
+
 function operate(oper, num1, num2) {
     if (oper === "" || num1 === "" || num2 === "") {
         return `Won't happen.`;
@@ -50,11 +58,11 @@ digitButtons.forEach(button => {
 
         if (oper === "") {
             num1 += clickedNum;
-            display.textContent = num1;
         } else {
             num2 += clickedNum;
-            display.textContent = num2;
         }
+
+        updateDisplay();
     });
 });
 
@@ -118,15 +126,15 @@ decimalButton.addEventListener("click", () => {
         if (!num1.includes(".")) {
             if (num1 === "") num1 = "0"; //If empty, make it "0."
             num1 += ".";
-            display.textContent = num1;
         }
     } else {
         if (!num2.includes(".")) {
             if (num2 === "") num2 = "0";
             num2 += ".";
-            display.textContent = num2;
         }
     }
+
+    updateDisplay();
 });
 
 const backspaceButton = document.querySelector(".backspace");
@@ -137,20 +145,20 @@ backspaceButton.addEventListener("click", () => {
     if (oper === "") {
         //Modify num1
         num1 = num1.slice(0, -1);
-        display.textContent = num1 === "" ? "0" : num1; // If empty, show 0
     } else {
         //Modify num2
         num2 = num2.slice(0, -1);
-        display.textContent = num2 === "" ? "0" : num2; 
     }
+
+    updateDisplay();
 })
 
-window.addEventListener("keydown", (event) => {
-
+// Keyboard actions. If project grows, target not the window, but the calc container directly (like C/c, -, .)
+window.addEventListener("keydown", (event) => {    
     //numbers 0-9:
     if (event.key >= "0" && event.key <= "9") {
         //Find the digit btn which text matches pressed key:
-        const digitBtn = Array.from(digitButtons).find(btn.textContent === event.key);
+        const digitBtn = Array.from(digitButtons).find(btn => btn.textContent === event.key);
         if (digitBtn) digitBtn.click();
     }
 
@@ -170,9 +178,9 @@ window.addEventListener("keydown", (event) => {
         backspaceButton.click();
     }
 
-    if (event.key === "C") {
+    if (event.key === "C" || event.key === "c") {
         clearButton.click();
-    }
+    } 
 
     if (event.key === ".") {
         decimalButton.click();
