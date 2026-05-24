@@ -130,7 +130,6 @@ decimalButton.addEventListener("click", () => {
 });
 
 const backspaceButton = document.querySelector(".backspace");
-
 backspaceButton.addEventListener("click", () => {
     //If they click bckspc after an equation done, just stop:
     if (isFinished) return;
@@ -145,3 +144,39 @@ backspaceButton.addEventListener("click", () => {
         display.textContent = num2 === "" ? "0" : num2; 
     }
 })
+
+window.addEventListener("keydown", (event) => {
+
+    //numbers 0-9:
+    if (event.key >= "0" && event.key <= "9") {
+        //Find the digit btn which text matches pressed key:
+        const digitBtn = Array.from(digitButtons).find(btn.textContent === event.key);
+        if (digitBtn) digitBtn.click();
+    }
+
+    //ops +-*/:
+    if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/") {
+        const operBtn = Array.from(operButtons).find(btn => btn.textContent === event.key);
+        if (operBtn) operBtn.click();
+    }
+
+    // enter, =, backspace, clear, decimal...:
+    if (event.key === "=" || event.key === "Enter") {
+        event.preventDefault();
+        equalsButton.click();
+    }
+
+    if (event.key === "Backspace") {
+        backspaceButton.click();
+    }
+
+    if (event.key === "C") {
+        clearButton.click();
+    }
+
+    if (event.key === ".") {
+        decimalButton.click();
+    }
+
+
+});
