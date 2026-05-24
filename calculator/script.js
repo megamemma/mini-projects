@@ -6,32 +6,32 @@ function divide(a, b) {
     return a / b;
 }
 
-let num1 = "";
+let prevInput = "";
 let oper = "";
-let num2 = "";
+let currInput = "";
 let isFinished = false; // Tracks if just solved an equation
 
 function updateDisplay() {
     if (oper === "") {
-        display.textContent = num1 === "" ? "0" : num1;
+        display.textContent = prevInput === "" ? "0" : num1;
     } else {
-        display.textContent = num2 === "" ? "0" : num2;
+        display.textContent = currInput === "" ? "0" : currInput;
     }
 }
 
-function operate(oper, num1, num2) {
-    if (oper === "" || num1 === "" || num2 === "") {
+function operate(oper, prevInput, currInput) {
+    if (oper === "" || prevInput === "" || currInput === "") {
         return `Won't happen.`;
     }
     
-    num1 = Number(num1);
-    num2 = Number(num2);
+    prevInput = Number(prevInput);
+    currInput = Number(currInput);
     let result;
 
-    if (oper === "+") result = add(num1, num2);
-    else if (oper === "-") result = subtract(num1, num2);
-    else if (oper === "*") result = multiply(num1, num2);
-    else if (oper === "/") result = divide(num1, num2);
+    if (oper === "+") result = add(prevInput, currInput);
+    else if (oper === "-") result = subtract(prevInput, currInput);
+    else if (oper === "*") result = multiply(prevInput, currInput);
+    else if (oper === "/") result = divide(prevInput, currInput);
     else return "Unknown operator.";
 
     //If the result has decimals, round to 4 dec.
@@ -52,14 +52,14 @@ digitButtons.forEach(button => {
         
         //If a prev calc-n just ended, reset all for a new one
         if (isFinished) {
-            num1 = "";
+            prevInput = "";
             isFinished = false;
         }
 
         if (oper === "") {
-            num1 += clickedNum;
+            prevInput += clickedNum;
         } else {
-            num2 += clickedNum;
+            currInput += clickedNum;
         }
 
         updateDisplay();
@@ -71,15 +71,15 @@ const operButtons = document.querySelectorAll(".operator");
 operButtons.forEach(button => {
     button.addEventListener("click", () => {
             // If we've a full equation waiting, calc it rn
-            if (num1 !== "" && num2 !== "") {
-                const result = operate(oper, num1, num2);
+            if (prevInput !== "" && currInput !== "") {
+                const result = operate(oper, prevInput, currInput);
                 display.textContent = result;
-                num1 = result.toString();
-                num2 = "";
+                prevInput = result.toString();
+                currInput = "";
             }
 
             // Save the +, -, *, / user just clicked.
-            if (num1 !== "") {
+            if (prevInput !== "") {
             oper = button.textContent;
             isFinished = false; 
             }
@@ -90,13 +90,13 @@ operButtons.forEach(button => {
 const equalsButton = document.querySelector(".equals");
 equalsButton.addEventListener("click", () => {
     //See if we've all 3 pcs before calc-ng:
-    if (num1 !== "" && oper !== "" && num2 !== "") {
-        const result = operate(oper, num1, num2);
+    if (prevInput !== "" && oper !== "" && currInput !== "") {
+        const result = operate(oper, prevInput, currInput);
         display.textContent = result; 
         //2. Update memory so user can chain next calc-s:
-        num1 = result.toString();
+        prevInput = result.toString();
         oper = "";
-        num2 = "";
+        currInput = "";
         isFinished = true; // Tell calc problem's solved.
     }
 });
@@ -104,9 +104,9 @@ equalsButton.addEventListener("click", () => {
 // The clear, C
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", () => {
-    num1 = "";
+    prevInput = "";
     oper = "";
-    num2 = "";
+    currInput = "";
     display.textContent = "0";
 });
 
@@ -115,7 +115,7 @@ decimalButton.addEventListener("click", () => {
     //If user clicks "." right after "=", start a fresh num "0."
 
     if (isFinished) {
-        num1 = "0.";
+        prevInput = "0.";
         display.textContent = num1;
         isFinished = false;
         return;
@@ -123,14 +123,14 @@ decimalButton.addEventListener("click", () => {
 
     if (oper === "") {
         // Only add "." if num1 doesn't alr have one.
-        if (!num1.includes(".")) {
-            if (num1 === "") num1 = "0"; //If empty, make it "0."
-            num1 += ".";
+        if (!prevInput.includes(".")) {
+            if (prevInput === "") prevInput = "0"; //If empty, make it "0."
+            prevInput += ".";
         }
     } else {
-        if (!num2.includes(".")) {
-            if (num2 === "") num2 = "0";
-            num2 += ".";
+        if (!currInput.includes(".")) {
+            if (currInput === "") currInput = "0";
+            currInput += ".";
         }
     }
 
@@ -144,10 +144,10 @@ backspaceButton.addEventListener("click", () => {
 
     if (oper === "") {
         //Modify num1
-        num1 = num1.slice(0, -1);
+        prevInput = prevInput.slice(0, -1);
     } else {
         //Modify num2
-        num2 = num2.slice(0, -1);
+        currInput = currInput.slice(0, -1);
     }
 
     updateDisplay();
