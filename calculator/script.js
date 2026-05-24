@@ -7,13 +7,13 @@ function divide(a, b) {
 }
 
 let prevInput = "";
-let oper = "";
 let currInput = "";
-let isFinished = false; // Tracks if just solved an equation
+let oper = "";
+let isFinished = false;
 
 function updateDisplay() {
     if (oper === "") {
-        display.textContent = prevInput === "" ? "0" : num1;
+        display.textContent = prevInput === "" ? "0" : prevInput;
     } else {
         display.textContent = currInput === "" ? "0" : currInput;
     }
@@ -116,7 +116,7 @@ decimalButton.addEventListener("click", () => {
 
     if (isFinished) {
         prevInput = "0.";
-        display.textContent = num1;
+        display.textContent = prevInput;
         isFinished = false;
         return;
     }
