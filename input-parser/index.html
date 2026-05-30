@@ -3,6 +3,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quick Formatting</title>
+
+    <style>
+        .tracker-machine {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.03);
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .counter-header {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #8fa09c;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1rem;
+            color: #243041;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 14px;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        #input:focus {
+            border-color: #ff6b00;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
+        }
+
+        #output-list {
+            margin-top: 20px;
+            padding-left: 24px;
+            color: #243041;
+        }
+
+        #output-list li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.15s ease;
+        }
+
+        #output-list li:hover {
+            color: #ff6b00;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const input = document.getElementById("inputField");
+            const charCounter = document.getElementById("char-counter");
+            const outputList = document.getElementById("output-list");
+
+        const monthMap = {
+            january: "01", feb: "02", february: "02", mar: "03", march: "03",
+            apr: "04", april: "04", may: "05", jun: "06", june: "06",
+            jul: "07", july: "07", aug: "08", august: "08", sep: "09",
+            september: "09", oct: "10", october: "10", nov: "11",
+            november: "11", dec: "12", december: "12"
+        };
+
+        function parseInputState(val) {
+            const parts = val.split(/\s+/);
+            if (parts.length < 3) return null;
+
+            const rawMonth = parts[0].toLowerCase();
+            let day = parts[1];
+            
+            if (!monthMap[rawMonth]) return null;
+            const monthNum = monthMap[rawMonth];
+
+            if (day.length === 1) day = "0" + day;
+            
+            const datePrefix = `(${day}.${monthNum})`;
+            const titleText = parts.slice(2).join(" ").trim();
+            
+            return { datePrefix, titleText };
+        }
+
+        // CHARACTER COUNTER 
+            input.addEventListener("input", () => {
+                const rawValue = input.value.trim();
+                const parsed = parseInputState(rawValue);
+
+                if (!parsed) {
+                    charCounter.textContent = "60";
+                    return;
+                }
+
+                const currentLength = parsed.datePrefix.length + 1 + parsed.titleText.length;
+                const remaining = 45 - currentLength;
+                
+                charCounter.textContent = remaining;
+            });
+
+            // 2. ENTRY PROCESSING AND DOM INJECTION ON ENTER
+            input.addEventListener("keydown", (event) => {
+                if (event.key !== "Enter") return;
+
+                const rawValue = input.value.trim();
+                const parsed = parseInputState(rawValue);
+                if (!parsed) return;
+
+                let title = parsed.titleText;
+
+                title = title.charAt(0).toUpperCase() + title.slice(1);
+                if (!title.endsWith(".")) title += ".";
+
+                const finalCleanString = `${parsed.datePrefix} ${title}`;
+
+                const li = document.createElement("li");
+                li.textContent = finalCleanString;
+
+                li.addEventListener("click", () => {
+                    navigator.clipboard.writeText(finalCleanString);
+                });
+
+                outputList.insertBefore(li, outputList.firstChild);
+
+                input.value = "";
+                charCounter.textContent = "60";
+            });
+        });
+
+    </script>
+
 </head>
 <body>
       <div class="input-parser">
