@@ -3,29 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books Vocab</title>
-    <style>
-        body { 
-            font-family: sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            padding-top: 50px; 
-        }
-
-        .container {
-            width: 300px;
-        }
-
-        #result {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            min-height: 20px;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="./styles.css">
+    <script defer src="./script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -39,36 +18,7 @@
     </div>
 
     <script>
-        const input = document.getElementById("wordInput");
-        const resultDiv = document.getElementById('result');
-        const savedList = document.getElementById('savedList');
-
-        input.addEventListener('keydown', async (e) => {
-            if (e.key === 'Enter') {
-                const word = input.value;
-                const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-                const data = await res.json();
-                const def = data[0].meanings[0].definitions[0].definition;
-                
-                resultDiv.innerHTML = `
-                    <p>${def}</p>
-                    <button onclick="saveWord('${word}', '${def}')">Keep</button>
-                    <button onclick="clearResult()">Discard</button>
-                `;
-            }
-        });
-
-        function saveWord(word, def) {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${word}</strong>: ${def} <button onclick="this.parentElement.remove()">X</button>`;
-            savedList.appendChild(li);
-            clearResult();
-        }
-
-        function clearResult() {
-            resultDiv.innerHTML = '';
-            input.value = '';
-        }
+        
     </script>
 </body>
 </html>

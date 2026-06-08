@@ -1,0 +1,21 @@
+body { 
+    font-family: sans-serif; 
+    display: flex; 
+    justify-content: center; 
+    padding-top: 50px; 
+}
+
+.container {
+    width: 300px;
+}
+
+#result {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-height: 20px;
+}
+
+.hidden {
+    display: none;
+}
