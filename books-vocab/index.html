@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Vocab</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px; 
+        }
+
+        .container {
+            width: 300px;
+        }
+
+        #result {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            min-height: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="wordInput" placeholder="Enter word...">
+        <div id="result"></div>
+
+        <details>
+            <summary>View Saved Words</summary>
+            <ul id="savedList"></ul>
+        </details>
+    </div>
+
+    <script>
+        const input = document.getElementById("wordInput");
+        const resultDiv = document.getElementById('result');
+        const savedList = document.getElementById('savedList');
+
+        input.addEventListener('keydown', async (e) => {
+            if (e.key === 'Enter') {
+                const word = input.value;
+                const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                const data = await res.json();
+                const def = data[0].meanings[0].definitions[0].definition;
+                
+                resultDiv.innerHTML = `
+                <p>${def}</p>
+                <button onclick="saveWord('${word}', '${def}')">Keep</button>
+                `;
+            }
+        });
+
+        function saveWord(word, def) {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${word}</strong>: ${def}`;
+            savedList.appendChild(li);
+            resultDiv.innerHTML = ''; // "Vanish" effect
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
