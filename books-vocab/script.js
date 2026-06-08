@@ -21,7 +21,6 @@ function saveState() {
     localStorage.setItem('myWords', JSON.stringify(words));
 }
 
-
 input.addEventListener('keydown', async (e) => {
     if (e.key === 'Enter') {
         const word = input.value.trim();
@@ -30,10 +29,24 @@ input.addEventListener('keydown', async (e) => {
         try {
             const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
             const data = await res.json();
-
-            const def = data[0].meanings[0].definitions[0].definition;
             const wordData = data[0];
-            renderResult(word, def, wordData);
+
+            // Собираем все определения в плоский массив объектов {part, def}
+            let flatDefinitions = [];
+            wordData.meanings.forEach(m => {
+                m.definitions.slice(0, 2).forEach(defObj => {
+                    flatDefinitions.push({ part: m.partOfSpeech, text: defObj.definition });
+                });
+            });
+
+            // Формируем строку с нумерацией прямо здесь
+            const combinedDef = flatDefinitions
+                .map((item, index) => `${index + 1}. (${item.part}) ${item.text}`)
+                .join('\n\n');
+
+            resultArea.innerHTML = '';
+            renderResult(word, combinedDef, wordData);
+
         } catch (err) {
             console.error(err);
             alert(`Definition not found.`);
@@ -65,6 +78,5 @@ function renderResult(word, def, wordData) {
         resultArea.innerHTML = '';
     }
 
-    resultArea.innerHTML = ''; // Clear previous
     resultArea.appendChild(clone);
 }
