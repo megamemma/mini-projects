@@ -1,5 +1,5 @@
 const input = document.getElementById("wordInput");
-const resultDiv = document.getElementById('result');
+const resultArea = document.getElementById('resultArea');
 const savedList = document.getElementById('savedList');
 
 input.addEventListener('keydown', async (e) => {
@@ -9,22 +9,36 @@ input.addEventListener('keydown', async (e) => {
         const data = await res.json();
         const def = data[0].meanings[0].definitions[0].definition;
                 
-        resultDiv.innerHTML = `
-            <p>${def}</p>
-            <button onclick="saveWord('${word}', '${def}')">Keep</button>
-            <button onclick="clearResult()">Discard</button>
-        `;
+        renderResult(word, def);
     }
 });
 
-function saveWord(word, def) {
-    const li = document.createElement('li');
-    li.innerHTML = `<strong>${word}</strong>: ${def} <button onclick="this.parentElement.remove()">X</button>`;
-    savedList.appendChild(li);
-    clearResult();
+function renderResult(word, def) {
+    const template = document.getElementById('result-template');
+    const clone = template.content.cloneNode(true);
+
+    clone.querySelector('.def-text').textContent = `${word}: ${def}`;
+    clone.querySelector('.speak-btn').onclick = () => speak(word);
+    clone.querySelector('.save-btn').onclick = () => {
+        const li = document.createElement('li');
+        li.textContent = `${word}: ${def} `;
+        const del = document.createElement('button');
+        del.textContent = 'X';
+        del.onclick = () => li.remove();
+        li.appendChild(del);
+        savedList.appendChild(li);
+        resultArea.innerHTML = '';
+    };
+    clone.querySelector('.discard-btn').onclick = () => resultArea.innerHTML = '';
+
+    resultArea.innerHTML = ''; // Clear previous
+    resultArea.appendChild(clone);
 }
 
-function clearResult() {
-    resultDiv.innerHTML = '';
-    input.value = '';
+function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+  // Pick an English voice (you can filter for "Google" or "Microsoft" names)
+    const voices = window.speechSynthesis.getVoices();
+    utterance.voice = voices.find(v => v.lang === 'en-US') || voices[0];
+    window.speechSynthesis.speak(utterance);
 }

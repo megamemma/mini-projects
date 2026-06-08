@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <input type="text" id="wordInput" placeholder="Enter word...">
-        <div id="result"></div>
+        <div id="resultArea"></div>
 
         <details>
             <summary>View Saved Words</summary>
@@ -17,8 +17,13 @@
         </details>
     </div>
 
-    <script>
-        
-    </script>
+    <template id="result-template">
+        <div class="result-card">
+            <p class="def-text"></p>
+            <button class="speak-btn">🔊</button>
+            <button class="save-btn">Keep</button>
+            <button class="discard-btn">Discard</button>
+        </div>
+    </template>
 </body>
 </html>
