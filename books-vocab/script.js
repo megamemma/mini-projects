@@ -5,11 +5,16 @@ const savedList = document.getElementById('savedList');
 input.addEventListener('keydown', async (e) => {
     if (e.key === 'Enter') {
         const word = input.value;
-        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-        const data = await res.json();
-        const def = data[0].meanings[0].definitions[0].definition;
-                
-        renderResult(word, def);
+        if (!word) return;
+
+        try {
+            const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+            const data = await res.json();
+            const def = data[0].meanings[0].definitions[0].definition;
+            renderResult(word, def);
+        } catch (err) {
+            alert(`Definition not found.`);
+        }
     }
 });
 
