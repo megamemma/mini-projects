@@ -1,0 +1,228 @@
+:root {
+    --bg: #0e0c0a;
+
+    --paper: #1b1612;
+    --paper-2: #221c17;
+
+    --ink: #e7dfd6;
+    --muted: rgba(231,223,214,0.65);
+
+    --accent: #b39a6a;
+    --accent-2: #8c6f4a;
+
+    --danger: #a05a5a;
+
+    --border: rgba(231,223,214,0.12);
+
+    --radius: 8px;
+
+    --shadow: 0 18px 40px rgba(0,0,0,0.5);
+    --shadow-soft: 0 10px 24px rgba(0,0,0,0.35);
+
+    --t: 0.18s ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 20% 10%, rgba(179,154,106,0.08), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(140,111,74,0.06), transparent 45%),
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
+        url("https://images.unsplash.com/photo-1605241841795-c6cfde126135?q=80&w=1740&auto=format&fit=crop");
+
+    background-size: cover;
+    background-position: center;
+
+    letter-spacing: 0.2px;
+}
+
+.container {
+    width: 100%;
+    max-width: 540px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* SEARCH */
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border-radius: var(--radius);
+    background: rgba(10,8,6,0.85);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(6px);
+}
+
+#wordInput {
+    letter-spacing:10%;
+    font-style: oblique;
+    font-weight: 900;
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--ink);
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+#wordInput::placeholder {
+    color: rgba(231,223,214,0.45);
+}
+
+#searchBtn {
+    background: var(--accent);
+    color: #0b0907;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: transform var(--t), background var(--t);
+}
+
+#searchBtn:hover {
+    transform: translateY(-1px);
+    background: var(--accent-2);
+}
+
+/* RESULT */
+
+.result-card {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 22px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.def-text {
+    font-size: 1.35rem;
+    line-height: 1.6;
+    padding: 1rem;
+    white-space: pre-line;
+}
+
+/* DRAWER */
+
+.saved-drawer {
+    padding: 18px;
+    border-radius: var(--radius);
+    background: var(--paper-2);
+    color: var(--ink);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+}
+
+.saved-drawer summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: "❧";
+    font-size: 0.9rem;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    transition: transform 0.25s ease;
+}
+
+details[open] summary::after {
+    transform: rotate(90deg);
+}
+
+#savedList {
+    margin-top: 14px;
+}
+
+#savedList li {
+    background: rgba(27,22,18,0.85);
+    color: var(--ink);
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+
+    transition: transform var(--t);
+}
+
+#savedList li:hover {
+    transform: translateX(2px);
+}
+
+/* BUTTONS */
+
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform var(--t), background var(--t);
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+.speak-btn {
+    font-size: 1.8rem;
+    padding: 18px;
+    margin-left: 12px;
+    margin-right: 50px;
+    color: var(--ink);
+    border-radius: 8px;
+    background: var(--paper-2);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+}
+
+.save-btn {
+    background: var(--accent);
+    color: #0b0907;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.discard-btn {
+    background: transparent;
+    color: var(--muted);
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+.discard-btn:hover {
+    color: var(--ink);
+    border-color: var(--accent);
+}
