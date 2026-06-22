@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'Norse';
-    src: url('subset-Norse-Bold.woff2') format('woff2'),
-        url('subset-Norse-Bold.woff') format('woff');
+    src: url('./assets/fonts/subset-Norse-Bold.woff2') format('woff2'), url('./assets/fonts/subset-Norse-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -9,8 +8,8 @@
 
 @font-face {
     font-family: 'Norse';
-    src: url('subset-Norse.woff2') format('woff2'),
-        url('subset-Norse.woff') format('woff');
+    src: url('./assets/fonts/subset-Norse.woff2') format('woff2'),
+        url('./assets/fonts/subset-Norse.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -40,6 +39,10 @@ body {
 }
 
 .branding-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
     position: absolute;
     top: 20%;
     left: 0;
@@ -52,6 +55,13 @@ body {
 .branding-logo img {
     max-width: 150px;
     height: auto;
+}
+
+.logo-text {
+    font-family: "Norse", sans-serif;
+    font-weight: bold;
+    font-size: 3rem;
+    color: white;
 }
 
 .sign-up-content {
