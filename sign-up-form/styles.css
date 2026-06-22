@@ -81,3 +81,27 @@ body {
     flex-direction: column; /* Puts the label on top of the input */
 }
 
+input {
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+input:focus {
+    border-left: 5px solid #596D48; /* Highlight when clicking into it */
+    outline: none;
+}
+
+input:user-invalid {
+    border: 1px solid red; /* The "error" state */
+}
+
+button {
+    background-color: #596D48;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
