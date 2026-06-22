@@ -19,6 +19,7 @@
 body {
     margin: 0;
     height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sign-up-layout {
@@ -59,7 +60,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Vertically centers the form */
-    padding: 2rem;
+    padding: 0; /* Gets plastered wide, not like a sep.box */
 }
 
 .sign-up-form {
