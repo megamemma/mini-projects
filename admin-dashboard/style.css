@@ -1,0 +1,26 @@
+
+.sidebar {
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar > a {
+    text-decoration: none;
+    color: white;
+}
+
+.header {
+    background-color: lightgoldenrodyellow;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        "sidebar header header"
+        "sidebar main widgets";
+    height: 100vh;
+}

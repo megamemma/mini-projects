@@ -2,35 +2,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
     <title>Admin Dashboard</title>
 </head>
 <body>
-    <aside class="sidebar">
-        <a href="" class="sidebar-link">Home</a>
-        <a href="" class="sidebar-link">Profile</a>
-        <a href="" class="sidebar-link">Messages</a>
-        <a href="" class="sidebar-link">History</a>
-        <a href="" class="sidebar-link">Tasks</a>
-        <a href="" class="sidebar-link">Communities</a>
+    <div class="dashboard-grid">
+        <aside class="sidebar">
+            <a href="" class="sidebar-link">Home</a>
+            <a href="" class="sidebar-link">Profile</a>
+            <a href="" class="sidebar-link">Messages</a>
+            <a href="" class="sidebar-link">History</a>
+            <a href="" class="sidebar-link">Tasks</a>
+            <a href="" class="sidebar-link">Communities</a>
 
-        <a href="" class="sidebar-link">Settings</a>
-        <a href="" class="sidebar-link">Support</a>
-        <a href="" class="sidebar-link">Privacy</a>
-    </aside>
+            <a href="" class="sidebar-link">Settings</a>
+            <a href="" class="sidebar-link">Support</a>
+            <a href="" class="sidebar-link">Privacy</a>
+        </aside>
 
-    <header class="header">
-        <div class="search-container">
-            <form action="/search" id="search-bar"></form>
-            <div class="search-icon"></div>
-        </div>
-        <div class="header-user-nav">
-            <button class="notif-btn"></button>
-            <img src="pfp.jpg" class="user-avatar" alt="">
-        </div>
-    </header>
+        <header class="header">
+            <div class="search-box">
+                <form action="/search" id="search-bar"></form>
+                <div class="search-icon"></div>
+            </div>
+            <div class="header-user-nav">
+                <button class="notif-btn"></button>
+                <img src="pfp.jpg" class="user-avatar" alt="">
+            </div>
+            <div class="header-profile">
+                <img src="" alt="">
+                <p>Hi there, Morgan Oakley (@morgan)</p>
 
-    <main class="main-content">
-        div.
-    </main>
+                <div class="header-action-buttons">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+        </header>
+
+        <main class="projects">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </main>
+
+        <section class="widget-area">
+            <div class="announcements"></div>
+            <div class="trending"></div>
+        </section>
+    </div>
 </body>
 </html>
