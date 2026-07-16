@@ -13,5 +13,14 @@ class Book {
     }
 }
 
-const theHobbit = new Book ("The Hobbit", "J Tolkien", 295, false);
-console.log(theHobbit);
+// Create an array:
+const myLibrary = [];
+
+function addBookToLibrary(title, author, pages, read) {
+    const newBook = new Book(title, author, pages, read);  //create an obj instance
+    myLibrary.push(newBook); //push it into the array
+} 
+
+// example of the call:
+addBookToLibrary("The Hobbit", "J. Tolkien", 295, false);
+console.log(myLibrary);
