@@ -19,5 +19,23 @@
         <div class="card">Book2</div>
         <div class="card">Book2</div>
     </div>
+
+    <button id="open-form">
+        New Book
+        <svg xmlns="http://www.w3.org/2000/svg" width="20px" viewBox="0 0 24 24"><title>plus-thick</title><path d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" /></svg>
+    </button>
+
+    <dialog id="book-dialog">
+        <form id="book-form">
+            <input type="text" name="title" placeholder="Title" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <input type="number" name="pages" placeholder="Pages" required>
+            <label>
+                Read? <input type="checkbox" name="read">
+            </label>
+            <button type="submit">Add Book</button>
+            <button type="button" id="close-form">Cancel</button>
+        </form>
+    </dialog>
 </body>
 </html>

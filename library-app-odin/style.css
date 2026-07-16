@@ -24,3 +24,16 @@ h1 {
     background-color:aliceblue;
     padding: 10px 20px;
 }
+
+button {
+    border-radius: 30px;
+    border: 1px solid lightgray;
+    padding: 15px;
+    margin: 20px;
+    font-weight: bold;   
+}
+
+.open-form button {
+    display: flex;
+    justify-content: center;
+}
