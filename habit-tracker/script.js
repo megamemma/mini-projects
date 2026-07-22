@@ -36,3 +36,9 @@ habitTitle.onclick = function () {
         habitTitle.innerHTML = habits;
     }
 }
+
+const daysInTheMonthList = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const daysInThisMonth = daysInTheMonthList[currentMonth];
+
+let daysCompleted = 0;
+const totalDays = document.getElementById("totalDays");
