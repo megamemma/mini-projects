@@ -1,10 +1,11 @@
 // GET THE DATE 
 
-let date = new Date();
-let currentMonth = date.getMonth();
-let currentDay = date.getDay();
-let currentDate = date.getDate();
-let currentYear = date.getFullYear();
+const date = new Date();
+const currentMonth = date.getMonth();
+
+const currentDay = date.getDay();
+const currentDate = date.getDate();
+const currentYear = date.getFullYear();
 
 const MONTHS = [
     "January",
@@ -18,5 +19,20 @@ const MONTHS = [
     "September",
     "October",
     "November",
-    "December",
+    "December"
 ];
+
+// SET THE CORRECT MONTH:
+const title = document.getElementById("title");
+title.innerHTML = MONTHS[currentMonth]; 
+
+// UPDATE THE CALENDAR INFO:
+const habitTitle = document.getElementById("habitTitle");
+habitTitle.onclick = function () {
+    let habits = prompt(`What's your habit`, habitTitle.innerHTML);
+    if(habits.length == 0) {
+        habitTitle.innerHTML = `Click to set your habit`;
+    } else {
+        habitTitle.innerHTML = habits;
+    }
+}
