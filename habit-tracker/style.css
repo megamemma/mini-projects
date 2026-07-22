@@ -1,1 +1,58 @@
 @import url('https://fonts.cdnfonts.com/css/rekiya');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(243, 219, 219);
+    background-image: url("./images/watermelon-bkgd.avif");
+    background-size: 900px;
+    background-blend-mode: soft-light;
+    font-family: 'Rekiya', sans-serif;
+    text-align: center;
+}
+
+#title {
+    margin-top: 40px;
+    line-height: 35px;
+}
+
+#subtitle {
+    opacity: 0.6;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+#calendarContainer {
+    display: flex;
+    justify-content: end;
+}
+
+#calendarDiv {
+    background-color: white;
+    border-radius: 20px;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    /* Remove width later to make responsive */
+    width: 85%;
+}
+
+#calendarHeading {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid black;
+    border-radius: 20px 20px 0 0;
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgb(251, 187, 187);
+    line-height: 10px;
+}
+
+#calendarContent {
+    border: 2px solid black;
+    padding: 20px;
+}
