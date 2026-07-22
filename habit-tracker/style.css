@@ -56,3 +56,18 @@ body {
     border: 2px solid black;
     padding: 20px;
 }
+
+.days {
+    display: flex;
+}
+
+.day {
+    width: 30px;
+    background-color: rgb(251, 187, 187);
+    margin: 3px;
+    padding: 10px 20px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 20px;
+    border: 2px solid black;
+}
