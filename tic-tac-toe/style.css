@@ -1,0 +1,147 @@
+:root {
+    --bg: #c6ccdc;
+    --panel: #8299d3;
+    --border: #7786ad;
+    --text: #eef0f4;
+    --muted: #b9c8f3;
+    --x-color: #185d82;
+    --o-color: #9b6245;
+    --accent: #91c4b1;
+    --h1-color: rgb(78, 93, 156);
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.app {
+    text-align: center;
+    padding: 2rem;
+}
+
+h1 {
+    color: var(--h1-color);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+}
+
+/* Player setup form: */
+.player-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    background: var(--panel);
+    padding: 1.25rem;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+}
+
+.player-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+.player-input label {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.player-input input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+
+button:hover {
+  opacity: 0.9;
+}
+ 
+button:active {
+  transform: scale(0.97);
+}
+ 
+.hidden {
+  display: none;
+}
+
+/* Status line */
+.status {
+  min-height: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: grey;
+}
+
+/* ---------- Board ---------- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  grid-template-rows: repeat(3, 90px);
+  gap: 6px;
+  margin: 0 auto 1.5rem;
+  width: fit-content;
+}
+
+
+.cell {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+
+.cell:hover:not(.taken) {
+  background: #333846;
+}
+ 
+.cell.taken {
+  cursor: not-allowed;
+}
+ 
+.cell.x-mark {
+  color: var(--x-color);
+}
+ 
+.cell.o-mark {
+  color: var(--o-color);
+}
