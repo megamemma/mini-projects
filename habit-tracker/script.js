@@ -98,3 +98,41 @@ for (let i = 0; i < currentDate; i++) {
             chosenDayDiv.style.backgroundColor = "white";
         }
 }
+
+// UPDATE COMPLETED ON CALENDAR:
+const dayDivs = document.querySelectorAll(".day");
+for (let i = 0; i < currentDate; i++ ){
+    dayDivs[i].onclick = function (e) {
+        let num = e.target.innerText;
+        let selectedDate = document.getElementById(e.target.id);
+        let storageString = 
+            "" + (currentMonth + 1) + "-" + num + "-" + currentYear;
+        if (localStorage.getItem(storageString) === "false") {
+            selectedDate.style.backgroundColor = "pink";
+            localStorage.setItem(storageString, true);
+            daysCompleted++ ;
+        } else if (localStorage.getItem(storageString) === "true") {
+            selectedDate.style.backgroundColor = "white";
+            localStorage.setItem(storageString, false);
+            daysCompleted-- ;
+        }
+        totalDays.innerHTML = daysCompleted + "/" + dayCount;
+        if (daysCompleted === currentDate) {
+            alert("Doing great.");
+        }
+    }
+}
+
+// RESET BUTTON:
+const resetButton = document.getElementById("resetButton");
+resetButton.onclick = function () {
+    for (let i = 0; i < dayCount; i ++ ){
+        let tempStrings = 
+            "" + (currentMonth + 1) + "-" + (i+1) + "-" + currentYear;
+        localStorage.setItem(tempStrings, "false");
+        const curDay = document.getElementById("day" + (i+1));
+        curDay.style.backgroundColor = "white";
+    }
+    daysCompleted = 0;
+    totalDays.innerHTML = daysCompleted + "/" + daysInThisMonth;
+}
