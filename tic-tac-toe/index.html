@@ -8,5 +8,30 @@
 </head>
 <body>
     
+    <main class="app">
+        <h1>Tic Tac Toe</h1>
+
+        <!-- Player setup form, hidden once game starts, shown again on restart -->
+         <section class="player-form" id="player-form">
+            <div class="player-input">
+                <label for="player-x-name">Player X</label>
+                <input type="text" id="player-x-name" placeholder="Player X" maxlength="12"/>
+            </div>
+            <div class="player-input">
+                <label for="player-o-name">Player 0</label>
+                <input type="text" id="player-o-name" placeholder="Player 0" maxlength="12"/>
+            </div>
+            <button id="start-btn">Start Game</button>
+         </section>
+
+         <!-- Status text, whose turn/who won: -->
+         <div class="status" id="status"></div>
+
+         <!-- 3x3 board. Filled in by JS -->
+          <div class="board" id="board"></div>
+
+          <!-- Restart button -->
+           <button id="restart-btn" class="hidden">Restart</button>
+    </main>
 </body>
 </html>
