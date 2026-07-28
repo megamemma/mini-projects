@@ -28,7 +28,7 @@ body {
 
 #calendarContainer {
     display: flex;
-    justify-content: end;
+    justify-content: center;
 }
 
 #calendarDiv {
@@ -63,13 +63,12 @@ body {
 .day {
     width: 30px;
     height: 45px;
-    background-color: rgb(251, 187, 187);
+
     margin: 3px;
     padding: 20px;
     font-size: 15px;
     text-align: center;
     border-radius: 20px;
-    border: 2px solid black;
 }
 
 #resetButton {

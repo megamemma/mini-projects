@@ -1,8 +1,8 @@
 // GET THE DATE 
 
 const date = new Date();
-const currentMonth = date.getMonth();
 
+const currentMonth = date.getMonth();
 const currentDay = date.getDay();
 const currentDate = date.getDate();
 const currentYear = date.getFullYear();
@@ -42,6 +42,8 @@ const daysInThisMonth = daysInTheMonthList[currentMonth];
 
 let daysCompleted = 0;
 const totalDays = document.getElementById("totalDays");
+totalDays.innerHTML = "0/" + daysInThisMonth;
+
 
 // SET UP THE CALENDAR DAYS: 
 let dayCount = 0;
@@ -66,4 +68,33 @@ for (let i = 0; i < days.length; i++) {
         }
     } 
     rowCount++;
+}
+
+// INITIALIZE COMPLETED ARRAY: 
+let completed = new Array(31);
+for (let i = 0; i < dayCount; i++) {
+    let tempString = 
+        "" + (currentMonth + 1) + "-" + (i+1) + "-" + currentYear;
+        let tempDay = localStorage.getItem(tempString);
+        if (tempDay == null || tempDay == "false" ) {
+            localStorage.setItem(tempString, "false");
+        } else if (tempDay == "true") {
+            daysCompleted++ ;
+        }
+        totalDays.innerHTML = daysCompleted + "/" + daysInThisMonth;
+}
+
+// CHECK STORAGE AND UPDATE COMPLETED ARRAY:
+
+for (let i = 0; i < currentDate; i++) {
+    let tempstring = 
+        "" + (currentMonth + 1) + "-" + (i + 1) + "-" + currentYear;
+
+        let chosenDay = localStorage.getItem(tempString);
+        let chosenDayDiv = document.getElementById("day" + (i + 1));
+        if (chosenDay === "true") {
+            chosenDayDiv.style.backgroundColor = "pink";
+        } else if (chosenDay === "false") {
+            chosenDayDiv.style.backgroundColor = "white";
+        }
 }
