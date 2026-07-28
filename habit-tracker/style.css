@@ -36,39 +36,62 @@ body {
     border-radius: 20px;
     margin: auto;
     align-content: center;
+    overflow: hidden;
     text-align: center;
-    /* width: 85% */
 }
 
 #calendarHeading {
     display: flex;
     justify-content: space-between;
-    border: 2px solid black;
     border-radius: 20px 20px 0 0;
+    border-bottom: 2px solid black;
     padding: 10px;
     font-size: 16px;
     background-color: rgb(251, 187, 187);
     line-height: 10px;
 }
 
+#habitTitle {
+    cursor: pointer;
+}
+
 #calendarContent {
-    border: 2px solid black;
     padding: 20px;
 }
 
-.days {
-    display: flex;
+#tracker {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
 }
 
 .day {
     width: 30px;
     height: 45px;
-
-    margin: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
     padding: 20px;
     font-size: 15px;
     text-align: center;
     border-radius: 20px;
+}
+
+.day.today {
+    background-color: rgb(251, 187, 187);
+    border: 2px solid black;
+}
+
+.day.completed {
+    background-color: pink;
+}
+
+.day.empty {
+    visibility: hidden;
+    cursor: default;
 }
 
 #resetButton {
@@ -79,4 +102,5 @@ body {
     font-family: inherit;
     background-color: green;
     color: white;
+    cursor: pointer;
 }
