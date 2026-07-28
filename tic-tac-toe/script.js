@@ -125,3 +125,92 @@ const GameController = (function () {
 // console.log(GameController.playRound(4)); // Bob plays center
 // console.log(GameController.playRound(2)); // Alice completes top row -> win
 // console.log(Gameboard.getBoard());
+
+// The ONLY object working with DOM. Asks GameController/Gameboard for data,
+// and renders it. NEVER contains game rules. Just reflects state the 2 report back.
+
+const DisplayController = (function () {
+  const boardDiv = document.getElementById("board");
+  const statusDiv = document.getElementById("status");
+  const startBtn = document.getElementById("start-btn");
+  const restartBtn = document.getElementById("restart-btn");
+  const playerForm = document.getElementById("player-form");
+  const playerXInput = document.getElementById("player-x-name");
+  const playerOInput = document.getElementById("player-o-name");
+ 
+  let gameStarted = false;
+
+  // Rebuilds the 9 cells from scratch based on the current board array.
+  const renderBoard = () => {
+    boardDiv.innerHTML = "";
+    const board = Gameboard.getBoard();
+ 
+    board.forEach((mark, index) => {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.dataset.index = index;
+ 
+      if (mark === "X") cell.classList.add("x-mark", "taken");
+      if (mark === "O") cell.classList.add("o-mark", "taken");
+      cell.textContent = mark;
+ 
+      cell.addEventListener("click", handleCellClick);
+      boardDiv.appendChild(cell);
+    });
+  };
+
+  const renderStatus = () => {
+    if (!gameStarted) {
+      statusDiv.textContent = "Enter names and press Start Game.";
+      return;
+    }
+    if (GameController.isGameOver()) {
+      const winner = GameController.getWinner();
+      statusDiv.textContent =
+        winner === "tie" ? "It's a tie!" : `${winner.name} wins!`;
+    } else {
+      statusDiv.textContent = `${GameController.getActivePlayer().name}'s turn (${GameController.getActivePlayer().mark})`;
+    }
+  };
+
+  const handleCellClick = (event) => {
+    if (!gameStarted || GameController.isGameOver()) return;
+ 
+    const index = Number(event.target.dataset.index);
+    const result = GameController.playRound(index);
+ 
+    if (!result.success) return; // cell was taken, ignore the click
+ 
+    renderBoard();
+    renderStatus();
+  };
+ 
+  const handleStart = () => {
+    GameController.startGame(playerXInput.value.trim(), playerOInput.value.trim());
+    gameStarted = true;
+    playerForm.classList.add("hidden");
+    restartBtn.classList.remove("hidden");
+    renderBoard();
+    renderStatus();
+  };
+ 
+  const handleRestart = () => {
+    gameStarted = false;
+    Gameboard.reset();
+    playerForm.classList.remove("hidden");
+    restartBtn.classList.add("hidden");
+    renderBoard();
+    renderStatus();
+  };
+ 
+  const init = () => {
+    startBtn.addEventListener("click", handleStart);
+    restartBtn.addEventListener("click", handleRestart);
+    renderBoard();
+    renderStatus();
+  };
+ 
+  return { init };
+})();
+
+DisplayController.init();
