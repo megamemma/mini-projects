@@ -117,3 +117,11 @@ const GameController = (function () {
         getWinner
     };
 })();
+
+// GameController.startGame("Alice", "Bob");
+// console.log(GameController.playRound(0)); // Alice (X) plays top-left
+// console.log(GameController.playRound(3)); // Bob (O) plays middle-left
+// console.log(GameController.playRound(1)); // Alice plays top-middle
+// console.log(GameController.playRound(4)); // Bob plays center
+// console.log(GameController.playRound(2)); // Alice completes top row -> win
+// console.log(Gameboard.getBoard());
